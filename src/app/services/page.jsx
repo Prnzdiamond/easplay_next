@@ -118,7 +118,7 @@ export default function Services() {
                   Connect with fellow gamers, discuss strategies, and build
                   friendships.
                 </p>
-                <a href="https://community.easplay.com">
+                <a href="https://videos.easplay.com/">
                   <Button
                     variant="outline"
                     className="mt-4 border-black text-black hover:bg-black hover:text-white bg-transparent"
@@ -219,7 +219,7 @@ export default function Services() {
             </div>
 
             <div className="mt-10">
-              <BtnO href="https://games.easplay.com" title="Watch Now" />
+              <BtnO href="https://videos.easplay.com" title="Watch Now" />
             </div>
           </div>
         </div>

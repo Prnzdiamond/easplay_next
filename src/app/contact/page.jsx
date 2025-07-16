@@ -81,22 +81,22 @@ export default function Contact() {
             </p>
             <p className="text-lg mb-2">Follow us on social media:</p>
             <div className="flex justify-center space-x-4 mt-4">
-              <a
+              {/* <a
                 href="#"
                 className="flex items-center text-white hover:text-orange-500"
               >
                 <Facebook className="mr-1 w-5 h-5" />
                 Facebook
-              </a>
+              </a> */}
               <a
-                href="#"
+                href="https://x.com/easplayng?s=11"
                 className="flex items-center text-white hover:text-orange-500"
               >
                 <Twitter className="mr-1 w-5 h-5" />
                 Twitter
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/easplaygames?igsh=Mm9wbzVtYzk0djFq"
                 className="flex items-center text-white hover:text-orange-500"
               >
                 <Instagram className="mr-1 w-5 h-5" />

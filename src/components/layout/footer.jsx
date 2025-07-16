@@ -1,12 +1,16 @@
-import { Button } from "@/components/ui/button";
+"use client";
 
-const year = new Date().getFullYear();
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 const socials = [
-  { name: "twitter", path: "https://twitter.com/easplay" },
-  { name: "youtube", path: "https://www.youtube.com/channel/easplay" },
-  { name: "instagram", path: "https://www.instagram.com/easplay/" },
-  { name: "facebook", path: "https://www.facebook.com/easplay/" },
+  { name: "twitter", path: "https://x.com/easplayng?s=11" },
+  // { name: "youtube", path: "https://www.youtube.com/channel/easplay" },
+  {
+    name: "instagram",
+    path: "https://www.instagram.com/easplaygames?igsh=Mm9wbzVtYzk0djFq",
+  },
+  // { name: "facebook", path: "https://www.facebook.com/easplay/" },
 ];
 
 const menus = [
@@ -22,14 +26,26 @@ const menus = [
   {
     name: "support",
     items: [
-      { name: "Help Center", path: "/help" },
-      { name: "Privacy Policy", path: "/privacy" },
-      { name: "Terms of Service", path: "/terms" },
+      { name: "Help Center", path: "/contact" },
+      {
+        name: "Privacy Policy",
+        path: "https://games.easplay.com/terms-and-conditions",
+      },
+      {
+        name: "Terms of Service",
+        path: "https://games.easplay.com/terms-and-conditions",
+      },
     ],
   },
 ];
 
 export function Footer() {
+  const [year, setYear] = useState(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="relative px-4 pt-8 pb-6 bg-[#1a1a1a] text-gray-200">
       <div className="container mx-auto">
