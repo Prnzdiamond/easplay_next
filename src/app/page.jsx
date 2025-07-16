@@ -8,7 +8,8 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { featuresData } from "@/data/features-data";
 import { contactData } from "@/data/contact-data";
-import { useState, useEffect } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const banners = [
   {
@@ -19,6 +20,7 @@ const banners = [
     image: "/img/Easplay/1.png",
     buttonText: "Contact Us Now",
     buttonLink: "/contact",
+    textColor: "white",
   },
   {
     id: 2,
@@ -28,6 +30,7 @@ const banners = [
     image: "/img/Easplay/11.png",
     buttonText: "Start Playing Now",
     buttonLink: "https://games.easplay.com/subscribe",
+    textColor: "white",
   },
   {
     id: 3,
@@ -37,6 +40,7 @@ const banners = [
     image: "/img/banners/xbox1.jpg",
     buttonText: "Discover Top Games",
     buttonLink: "https://games.easplay.com",
+    textColor: "white",
   },
   {
     id: 4,
@@ -46,44 +50,72 @@ const banners = [
     image: "/img/Easplay/Easplay-4.png",
     buttonText: "Get Rewards",
     buttonLink: "/contact",
+    textColor: "white",
   },
 ];
 
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 1024 },
+    items: 1,
+  },
+  desktop: {
+    breakpoint: { max: 1024, min: 768 },
+    items: 1,
+  },
+  tablet: {
+    breakpoint: { max: 768, min: 464 },
+    items: 1,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
+
 export default function Home() {
-  const [currentBanner, setCurrentBanner] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBanner((prev) => (prev + 1) % banners.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const banner = banners[currentBanner];
-
   return (
     <>
       <Navbar />
 
-      {/* Hero Section */}
-      <div className="relative flex h-[70vh] w-full items-center justify-between bg-black">
-        <div
-          className="absolute top-0 h-full w-full bg-cover bg-center opacity-80"
-          style={{ backgroundImage: `url(${banner.image})` }}
-        />
+      {/* Hero Section with Carousel */}
+      <Carousel
+        responsive={responsive}
+        autoPlay={true}
+        autoPlaySpeed={3000}
+        infinite={true}
+        showDots={false}
+        arrows={true}
+        transitionDuration={1000}
+        pauseOnHover={false}
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+      >
+        {banners.map((banner) => (
+          <div
+            key={banner.id}
+            className="relative flex h-[70vh] w-full items-center justify-between bg-black"
+          >
+            {/* Background Image */}
+            <div
+              className="absolute top-0 h-full w-full bg-cover bg-center opacity-80"
+              style={{ backgroundImage: `url(${banner.image})` }}
+            />
 
-        <div className="container relative mx-auto flex h-full items-center px-5">
-          <div className="w-1/2 space-y-4">
-            <h1 className="font-extrabold text-3xl md:text-5xl lg:text-6xl text-shadow-lg text-white">
-              {banner.title}
-            </h1>
-            <p className="opacity-100 text-lg md:text-xl lg:text-2xl text-white">
-              {banner.subtitle}
-            </p>
-            <BtnO href={banner.buttonLink} title={banner.buttonText} />
+            {/* Content Section */}
+            <div className="container relative mx-auto flex h-full items-center px-5">
+              <div className="w-1/2 space-y-4">
+                <h1 className="font-extrabold text-3xl md:text-5xl lg:text-6xl text-shadow-lg text-white">
+                  {banner.title}
+                </h1>
+                <p className="opacity-100 text-lg md:text-xl lg:text-2xl text-white">
+                  {banner.subtitle}
+                </p>
+                <BtnO href={banner.buttonLink} title={banner.buttonText} />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        ))}
+      </Carousel>
 
       {/* Features Section */}
       <section className="bg-white text-black px-4 pb-20 pt-4">

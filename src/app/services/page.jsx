@@ -6,7 +6,8 @@ import { Gamepad2, Users, Video } from "lucide-react";
 import { BtnO } from "@/components/ui/btn-o";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { useState, useEffect } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const movies = [
   {
@@ -27,22 +28,36 @@ const movies = [
 ];
 
 const gameImages = [
-  "https://games.easplay.com/_next/image?url=https%3A%2F%2Fadmin.fundam.ng%2Fstorage%2Fgames%2F41%2F1724745195.jpg&w=640&q=75",
-  "https://games.easplay.com/_next/image?url=https%3A%2F%2Fadmin.fundam.ng%2Fstorage%2Fgames%2F51%2F1724747724.jpg&w=640&q=75",
-  "https://games.easplay.com/_next/image?url=https%3A%2F%2Fadmin.fundam.ng%2Fstorage%2Fgames%2F59%2F1724748370.jpg&w=640&q=75",
-  "https://games.easplay.com/_next/image?url=https%3A%2F%2Fadmin.fundam.ng%2Fstorage%2Fgames%2F76%2F1724751245.jpg&w=640&q=75",
+  {
+    imgSrc:
+      "https://games.easplay.com/_next/image?url=https%3A%2F%2Fadmin.fundam.ng%2Fstorage%2Fgames%2F41%2F1724745195.jpg&w=640&q=75",
+    alt: "game carousel images",
+  },
+  {
+    imgSrc:
+      "https://games.easplay.com/_next/image?url=https%3A%2F%2Fadmin.fundam.ng%2Fstorage%2Fgames%2F51%2F1724747724.jpg&w=640&q=75",
+    alt: "game carousel images",
+  },
+  {
+    imgSrc:
+      "https://games.easplay.com/_next/image?url=https%3A%2F%2Fadmin.fundam.ng%2Fstorage%2Fgames%2F59%2F1724748370.jpg&w=640&q=75",
+    alt: "game carousel images",
+  },
+  {
+    imgSrc:
+      "https://games.easplay.com/_next/image?url=https%3A%2F%2Fadmin.fundam.ng%2Fstorage%2Fgames%2F76%2F1724751245.jpg&w=640&q=75",
+    alt: "game carousel images",
+  },
 ];
 
+const responsive = {
+  superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 1 },
+  desktop: { breakpoint: { max: 3000, min: 1024 }, items: 1 },
+  tablet: { breakpoint: { max: 1024, min: 464 }, items: 1 },
+  mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
+};
+
 export default function Services() {
-  const [currentGame, setCurrentGame] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentGame((prev) => (prev + 1) % gameImages.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <Navbar />
@@ -56,7 +71,7 @@ export default function Services() {
           {/* Services List */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
             {/* Service 1: Games */}
-            <div className="bg-white text-black border border-transparent shadow-lg transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl rounded-lg">
+            <div className="bg-white text-black border border-transparent shadow-lg transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl will-change-transform rounded-lg">
               <div className="flex flex-col items-center text-center p-8">
                 <Gamepad2 className="text-5xl mb-4 text-black w-12 h-12" />
                 <h4 className="text-xl font-semibold mb-2">Play Games</h4>
@@ -75,7 +90,7 @@ export default function Services() {
             </div>
 
             {/* Service 2: Videos */}
-            <div className="bg-white text-black border border-transparent shadow-lg transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl rounded-lg">
+            <div className="bg-white text-black border border-transparent shadow-lg transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl will-change-transform rounded-lg">
               <div className="flex flex-col items-center text-center p-8">
                 <Video className="text-5xl mb-4 text-black w-12 h-12" />
                 <h4 className="text-xl font-semibold mb-2">Watch Videos</h4>
@@ -95,7 +110,7 @@ export default function Services() {
             </div>
 
             {/* Service 3: Community */}
-            <div className="bg-white text-black border border-transparent shadow-lg transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl rounded-lg">
+            <div className="bg-white text-black border border-transparent shadow-lg transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl will-change-transform rounded-lg">
               <div className="flex flex-col items-center text-center p-8">
                 <Users className="text-5xl mb-4 text-black w-12 h-12" />
                 <h4 className="text-xl font-semibold mb-2">Join Community</h4>
@@ -115,7 +130,7 @@ export default function Services() {
             </div>
           </div>
 
-          {/* Leaderboard Highlight */}
+          {/* Attractive Highlights Section */}
           <div className="mb-10 bg-white p-8 rounded-lg shadow-lg">
             <div className="w-[80%] bg-black text-white p-4 rounded-xl mx-auto shadow-xl transform hover:scale-105 transition-transform duration-300">
               <h3 className="text-xl md:text-3xl font-bold mb-4">
@@ -135,22 +150,37 @@ export default function Services() {
           <h4 className="text-2xl font-semibold mb-4">
             Discover Our Most Played Games
           </h4>
-          <div className="flex justify-center w-full mb-6">
+          <div className="flex justify-center w-full">
             <div className="w-[90%]">
-              <div className="rounded-2xl overflow-hidden flex items-center justify-center h-[50vh] bg-black">
-                <Image
-                  src={gameImages[currentGame] || "/placeholder.svg"}
-                  alt="Game carousel image"
-                  width={800}
-                  height={400}
-                  className="w-full h-full object-fill transition-transform duration-300 transform hover:scale-105"
-                />
-              </div>
+              <Carousel
+                responsive={responsive}
+                infinite
+                autoPlay
+                autoPlaySpeed={2000}
+                transitionDuration={500}
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+              >
+                {gameImages.map(({ imgSrc, alt }, index) => (
+                  <div
+                    key={index}
+                    className="rounded-2xl overflow-hidden flex items-center justify-center h-[50vh] bg-black"
+                  >
+                    <Image
+                      loading="lazy"
+                      src={imgSrc || "/placeholder.svg"}
+                      alt={alt}
+                      width={800}
+                      height={400}
+                      className="w-full h-full object-fill transition-transform duration-300 transform hover:scale-105"
+                    />
+                  </div>
+                ))}
+              </Carousel>
             </div>
           </div>
 
           {/* Play Now Button */}
-          <div className="flex justify-center mb-10">
+          <div className="flex justify-center mt-6">
             <BtnO href="https://games.easplay.com" title="Play Now" />
           </div>
 
